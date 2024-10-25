@@ -1,0 +1,1125 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 22,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "d89676d4-bbde-4f01-8d2a-4285e081beac"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "node"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Requests"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used (from requests)"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 80
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 150
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average-absolut"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #limits"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Limits"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-limits"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "displayName",
+                "value": "Used (from limits)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #allocatable"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Allocatable"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #total-request-per-node"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Total Request Per Node"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 30
+                    },
+                    {
+                      "color": "green",
+                      "value": 50
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 85
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Node"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 219
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Request Per Node"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 191
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 25,
+        "w": 17,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Used (from requests)"
+          }
+        ]
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "d89676d4-bbde-4f01-8d2a-4285e081beac"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{resource=\"cpu\", node=~\".*worker.*\"}) by (node) \n/ \nsum(kube_node_status_allocatable{resource=\"cpu\", node=~\".*worker.*\"}) by (node) \n* 100 ",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "total-request-per-node"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_allocatable{resource=\"cpu\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "allocatable"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_requests{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\nsum(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average-absolut"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_node_status_allocatable{resource=\"cpu\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)\n*\navg(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_limits{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "limits"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_limits{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\nsum(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-limits"
+        }
+      ],
+      "title": "CPU Cores by Node",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #Total request per node": "",
+              "Value #allocatable": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "d89676d4-bbde-4f01-8d2a-4285e081beac"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "node"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Requests"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used (from requests)"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 80
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 150
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average-absolut"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage (1d)"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #limits"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Limits"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-limits"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "displayName",
+                "value": "Used (from limits)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #allocatable"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Allocatable"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage (1d)"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #memory-total-request"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Total Request per node"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 30
+                    },
+                    {
+                      "color": "green",
+                      "value": 50
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 85
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 32,
+        "w": 17,
+        "x": 0,
+        "y": 25
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Used"
+          }
+        ]
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "d89676d4-bbde-4f01-8d2a-4285e081beac"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{resource=\"memory\", node=~\".*worker.*\"}) by (node) \n/ \nsum(kube_node_status_allocatable{resource=\"memory\", node=~\".*worker.*\"}) by (node) \n* 100 ",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "memory-total-request"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_allocatable{resource=\"memory\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "allocatable"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n-\nsum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_requests{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\n(\n  sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n  -\n  sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg(sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}))) by (node)\n-\navg(sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}))) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average-absolut"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_node_status_allocatable{resource=\"memory\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)\n*\navg(\n  sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n-\n  sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_limits{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "limits"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_limits{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\n(\n  sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n  -\n  sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-limits"
+        }
+      ],
+      "title": "Memory by Node",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #allocatable": 3,
+              "Value #limits": 9,
+              "Value #memory-total-request": 2,
+              "Value #requests": 4,
+              "Value #used": 5,
+              "Value #used-average": 8,
+              "Value #used-average-absolut": 7,
+              "Value #used-from-limits": 10,
+              "Value #used-from-requests": 6,
+              "node": 1
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [
+    "Tenant"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Tenant nodes",
+  "uid": "ee1n2buad3x8gf",
+  "version": 1,
+  "weekStart": ""
+}
