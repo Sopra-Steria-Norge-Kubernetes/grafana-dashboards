@@ -1,47 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_POSEIDON-OK-TEST-1-DATASOURCE",
-      "label": "poseidon-ok-test-1-datasource",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "dashlist",
-      "name": "Dashboard list",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "11.2.0"
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -62,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 19,
   "links": [],
   "panels": [
     {
@@ -80,8 +37,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -132,12 +90,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -153,8 +111,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "Amount of worker nodes available for customer tenants",
       "fieldConfig": {
@@ -165,7 +124,7 @@
           "links": [
             {
               "title": "Tenant Nodes",
-              "url": "https://${grafana_url}/d/ee1n2buad3x8gf/tenant-nodes?orgId=1"
+              "url": "https://${grafana_url}﻿/d/ee1n2buad3x8gf/tenant-nodes?orgId=1"
             }
           ],
           "mappings": [],
@@ -209,12 +168,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -230,8 +189,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "Total available memory for all tenants",
       "fieldConfig": {
@@ -277,12 +237,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -298,8 +258,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "All Cores allocated to customer tenants",
       "fieldConfig": {
@@ -345,12 +306,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -366,8 +327,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "How much CPU all running containers have requested against how much CPU that are available on all workers.",
       "fieldConfig": {
@@ -419,12 +381,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"})/sum(instance:node_num_cpu:sum{instance=~\".*worker.*\"}) * 100",
@@ -439,8 +401,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "How much CPU all tenants have requested in the ClusterResoruceQuota against how much CPU that are availalbe on all workers.\n\nBelow 50% - Scale down worker node.\n\nAbove 67% - Scale up worker node.\n\nBetween - All good.",
       "fieldConfig": {
@@ -492,12 +455,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"})\n*\nsum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
@@ -512,8 +475,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "How much CPU the containers are using against how much CPU that are available on all workers",
       "fieldConfig": {
@@ -565,12 +529,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"})\n*\nsum(rate(container_cpu_usage_seconds_total{node=~\".*worker.*\"}[5m]))",
@@ -585,8 +549,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "How much memory all running containers have requested against how much memory that are available on all workers.",
       "fieldConfig": {
@@ -638,12 +603,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"memory\", node=~\".*worker.*\"})\n*\nsum(kube_pod_container_resource_requests{resource=\"memory\", node=~\".*worker.*\"})",
@@ -658,8 +623,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "How much memory all tenants have requested in the ClusterResoruceQuota against how much memory that are availalbe on all workers",
       "fieldConfig": {
@@ -711,12 +677,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"memory\", node=~\".*worker.*\"})\n*\nsum(openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"hard\"})",
@@ -731,8 +697,9 @@
     },
     {
       "datasource": {
+        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "How much memory the containers are using against how much memory that are available on all workers",
       "fieldConfig": {
@@ -784,12 +751,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "100\n/\nsum(kube_pod_container_resource_requests{resource=\"memory\", node=~\".*worker.*\"})\n*\nsum(rate(container_memory_usage_bytes{node=~\".*worker.*\"}[5m]))",
@@ -805,7 +772,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+        "uid": "d89676d4-bbde-4f01-8d2a-4285e081beac"
       },
       "gridPos": {
         "h": 7,
@@ -815,7 +782,7 @@
       },
       "id": 32,
       "options": {
-        "folderUID": "ce1n0wsfflczke",
+        "folderUID": "ce1nbatp4mltsf",
         "includeVars": false,
         "keepTime": false,
         "maxItems": 5,
@@ -829,7 +796,7 @@
           "Tenant"
         ]
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.2.2+security-01",
       "title": "Tenant Dashboards",
       "type": "dashlist"
     }
@@ -841,10 +808,33 @@
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "operations-grafana.apps.prod-1.cp.oslo.kommune.no",
+          "value": "operations-grafana.apps.prod-1.cp.oslo.kommune.no"
+        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+          "uid": "${datasource}"
         },
         "definition": "label_values(openshift_route_info{namespace=\"operations-grafana\"},host)",
         "hide": 2,
@@ -873,6 +863,6 @@
   "timezone": "browser",
   "title": "Cluster Tenant Overview",
   "uid": "de0a8j5k7ez28e",
-  "version": 1,
+  "version": 16,
   "weekStart": ""
 }
