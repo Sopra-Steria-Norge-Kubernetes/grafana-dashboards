@@ -1,4 +1,35 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_POSEIDON-OK-PROD-1-DATASOURCE",
+      "label": "poseidon-ok-prod-1-datasource",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.2.2+security-01"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,119 +46,33 @@
       }
     ]
   },
-  "description": "Shows cluster wide information about tenant usage",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 19,
+  "id": null,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 3,
-      "panels": [],
-      "title": "Cluster Tenant Overview",
-      "type": "row"
-    },
-    {
       "datasource": {
-        "name": "${datasource}",
+        "name": "${Datasource}",
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "links": [
-            {
-              "targetBlank": false,
-              "title": "Tenant Details",
-              "url": "https://${grafana_url}/d/be1n0z842rzswa/tenant-specifics?orgId=1"
-            }
-          ],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 0,
-        "y": 1
-      },
-      "id": 1,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
           },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(openshift_clusterresourcequota_created{})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Tenants",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Amount of worker nodes available for customer tenants",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "links": [
-            {
-              "title": "Tenant Nodes",
-              "url": "https://${grafana_url}﻿/d/ee1n2buad3x8gf/tenant-nodes?orgId=1"
-            }
-          ],
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -142,663 +87,1173 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "node"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Requests"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used (from requests)"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 80
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 150
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average-absolut"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #limits"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Limits"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-limits"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "displayName",
+                "value": "Used (from limits)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #allocatable"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Allocatable"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #total-request-per-node"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Total Request Per Node"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 30
+                    },
+                    {
+                      "color": "green",
+                      "value": 50
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 85
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Node"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 235
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Request Per Node"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 191
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Allocatable"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Requests"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Used"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Limits"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 113
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 2,
-        "y": 1
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 0
       },
       "id": 2,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
           "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(kube_node_info{node=~\".*worker.*\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Worker Nodes",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Total available memory for all tenants",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 5,
-        "y": 1
-      },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+          "reducer": [
+            "sum"
           ],
-          "fields": "",
-          "values": false
+          "show": false
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(kube_node_status_capacity{resource=\"memory\", node=~\".*worker.*\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Available Memory",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "All Cores allocated to customer tenants",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "Cores"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 10,
-        "y": 1
-      },
-      "id": 5,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Allocated Cores",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much CPU all running containers have requested against how much CPU that are available on all workers.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "semi-dark-green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 60
-              },
-              {
-                "color": "dark-red",
-                "value": 85
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 0,
-        "y": 5
-      },
-      "id": 18,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"})/sum(instance:node_num_cpu:sum{instance=~\".*worker.*\"}) * 100",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU - Application Requested / Worker Total",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much CPU all tenants have requested in the ClusterResoruceQuota against how much CPU that are availalbe on all workers.\n\nBelow 50% - Scale down worker node.\n\nAbove 67% - Scale up worker node.\n\nBetween - All good.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "yellow",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 50
-              },
-              {
-                "color": "dark-red",
-                "value": 67
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 5,
-        "y": 5
-      },
-      "id": 27,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"})\n*\nsum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU - Tenant Requests",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much CPU the containers are using against how much CPU that are available on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 66
-              },
-              {
-                "color": "dark-red",
-                "value": 85
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 10,
-        "y": 5
-      },
-      "id": 28,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"})\n*\nsum(rate(container_cpu_usage_seconds_total{node=~\".*worker.*\"}[5m]))",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU - Used / Requested",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much memory all running containers have requested against how much memory that are available on all workers.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 66
-              },
-              {
-                "color": "dark-red",
-                "value": 85
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 0,
-        "y": 13
-      },
-      "id": 30,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"memory\", node=~\".*worker.*\"})\n*\nsum(kube_pod_container_resource_requests{resource=\"memory\", node=~\".*worker.*\"})",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory - Application Requested / Worker Total",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much memory all tenants have requested in the ClusterResoruceQuota against how much memory that are availalbe on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 66
-              },
-              {
-                "color": "dark-red",
-                "value": 85
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 5,
-        "y": 13
-      },
-      "id": 31,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "100\n/\nsum(kube_node_status_capacity{resource=\"memory\", node=~\".*worker.*\"})\n*\nsum(openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"hard\"})",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory - Tenant Requests",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much memory the containers are using against how much memory that are available on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 66
-              },
-              {
-                "color": "dark-red",
-                "value": 85
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 10,
-        "y": 13
-      },
-      "id": 29,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.2.2+security-01",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "100\n/\nsum(kube_pod_container_resource_requests{resource=\"memory\", node=~\".*worker.*\"})\n*\nsum(rate(container_memory_usage_bytes{node=~\".*worker.*\"}[5m]))",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory - Used / Requested",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "d89676d4-bbde-4f01-8d2a-4285e081beac"
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 0,
-        "y": 21
-      },
-      "id": 32,
-      "options": {
-        "folderUID": "ce1nbatp4mltsf",
-        "includeVars": false,
-        "keepTime": false,
-        "maxItems": 5,
-        "query": "",
-        "showFolderNames": true,
-        "showHeadings": true,
-        "showRecentlyViewed": false,
-        "showSearch": true,
-        "showStarred": false,
-        "tags": [
-          "Tenant"
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Used (from requests)"
+          }
         ]
       },
       "pluginVersion": "11.2.2+security-01",
-      "title": "Tenant Dashboards",
-      "type": "dashlist"
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{resource=\"cpu\", node=~\".*worker.*\"}) by (node) \n/ \nsum(kube_node_status_allocatable{resource=\"cpu\", node=~\".*worker.*\"}) by (node) \n* 100 ",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "total-request-per-node"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_allocatable{resource=\"cpu\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "allocatable"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_requests{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\nsum(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average-absolut"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_node_status_allocatable{resource=\"cpu\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)\n*\navg(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_limits{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "limits"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_limits{resource=\"cpu\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\nsum(rate(node_cpu_seconds_total{mode!=\"idle\"}[5m]) * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-limits"
+        }
+      ],
+      "title": "CPU Cores by Node",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #Total request per node": "",
+              "Value #allocatable": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "name": "${Datasource}",
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "node"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Node"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Requests"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-requests"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used (from requests)"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 80
+                    },
+                    {
+                      "color": "red",
+                      "value": 120
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 150
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average-absolut"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage (1d)"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #limits"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Limits"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-from-limits"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "displayName",
+                "value": "Used (from limits)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #allocatable"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Allocatable"
+              },
+              {
+                "id": "unit",
+                "value": "bytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #used-average"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Average Usage (1d)"
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 75
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #memory-total-request"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Total Request per node"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "semi-dark-green",
+                      "value": 30
+                    },
+                    {
+                      "color": "green",
+                      "value": 50
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 70
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 85
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Node"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 236
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Used"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Requests"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 102
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Allocatable"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 113
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Limits"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Request per node"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 194
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Used"
+          }
+        ]
+      },
+      "pluginVersion": "11.2.2+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{resource=\"memory\", node=~\".*worker.*\"}) by (node) \n/ \nsum(kube_node_status_allocatable{resource=\"memory\", node=~\".*worker.*\"}) by (node) \n* 100 ",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "memory-total-request"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_allocatable{resource=\"memory\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "allocatable"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n-\nsum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_requests{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\n(\n  sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n  -\n  sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg(sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}))) by (node)\n-\navg(sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}))) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average-absolut"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_node_status_allocatable{resource=\"memory\"} * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"}) by (node)\n*\navg(\n  sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n-\n  sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-average"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_resource_limits{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "limits"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-PROD-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum(kube_pod_container_resource_limits{resource=\"memory\"} * on(pod, namespace) group_left() (kube_pod_status_phase{phase=\"Running\"}==1) * on(node) group_left() kube_node_role{node=~\".*worker.*\"}) by (node)\n*\n(\n  sum(node_memory_MemTotal_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n  -\n  sum(node_memory_MemAvailable_bytes{job=\"node-exporter\"} * on(instance) group_left(node) (label_replace((node_uname_info), \"node\", \"$1\", \"nodename\", \"(.*)\") * on(node) group_left(role) kube_node_role{node=~\".*worker.*\"})) by (node)\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "used-from-limits"
+        }
+      ],
+      "title": "Memory by Node",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #allocatable": 3,
+              "Value #limits": 9,
+              "Value #memory-total-request": 2,
+              "Value #requests": 4,
+              "Value #used": 5,
+              "Value #used-average": 8,
+              "Value #used-average-absolut": 7,
+              "Value #used-from-limits": 10,
+              "Value #used-from-requests": 6,
+              "node": 1
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "schemaVersion": 39,
@@ -808,61 +1263,28 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": true,
-          "text": "default",
-          "value": "default"
-        },
+        "current": {},
         "hide": 0,
         "includeAll": false,
-        "label": "Datasource",
         "multi": false,
-        "name": "datasource",
+        "name": "Datasource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "operations-grafana.apps.prod-1.cp.oslo.kommune.no",
-          "value": "operations-grafana.apps.prod-1.cp.oslo.kommune.no"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(openshift_route_info{namespace=\"operations-grafana\"},host)",
-        "hide": 2,
-        "includeAll": false,
-        "multi": false,
-        "name": "grafana_url",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(openshift_route_info{namespace=\"operations-grafana\"},host)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Cluster Tenant Overview",
-  "uid": "de0a8j5k7ez28e",
-  "version": 16,
+  "title": "Tenant nodes",
+  "uid": "ee1n2buad3x8gf",
+  "version": 9,
   "weekStart": ""
 }
