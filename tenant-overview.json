@@ -19,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 50,
+  "id": 53,
   "links": [],
   "panels": [
     {
@@ -193,7 +193,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "Total available memory for all tenants",
+      "description": "Total available memory on all workers",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -253,7 +253,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Available Memory",
+      "title": "Total Memory",
       "type": "stat"
     },
     {
@@ -262,7 +262,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "All Cores allocated to customer tenants",
+      "description": "All Cores available on all workers",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -322,7 +322,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Allocated Cores",
+      "title": "Total Cores",
       "type": "stat"
     },
     {
@@ -331,7 +331,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "How much CPU all running containers have requested against how much CPU that are available on all workers.",
+      "description": "How much CPU all running containers have requested against how much CPU that are allocatable on all workers.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -480,7 +480,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "How much CPU the containers are using against how much CPU that are available on all workers",
+      "description": "How much CPU the containers are using against how much CPU that are allocatable on all workers",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -554,7 +554,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "How much memory all running containers have requested against how much memory that are available on all workers.",
+      "description": "How much memory all running containers have requested against how much memory that are allocatable on all workers.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -702,7 +702,7 @@
         "type": "prometheus",
         "uid": "${datasource}"
       },
-      "description": "How much memory the containers are using against how much memory that are available on all workers",
+      "description": "How much memory the containers are using against how much memory that are allocatable on all workers",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -852,8 +852,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Cluster Tenant Overview",
-  "uid": "ce2m8vux2nxmoe",
-  "version": 17,
+  "title": "Cluster Tenant Overview Copy",
+  "uid": "ae2xmv1bzxzb4a",
+  "version": 8,
   "weekStart": ""
 }
