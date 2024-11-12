@@ -1,0 +1,907 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Price based on CPU Core requests",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 59,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Cost Managment",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Cost / Month"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "unit",
+                "value": "Kr"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total CPU Cores"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Cost / Month"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "unit",
+                "value": "Kr"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cost per CPU"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kr"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 16,
+        "x": 0,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(kube_node_info{node=~\".*worker.*\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Worker_Count"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"})",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Cpu_Cores"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "${worker_cpu_cost_ok}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "cost_per_cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"}) * ${worker_cpu_cost_ok}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "CPU_Cost"
+        }
+      ],
+      "title": "Application Cost",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #tenant_request_total": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #CPU_Cost": 4,
+              "Value #Cpu_Cores": 2,
+              "Value #Tenant_request_total_cost": 5,
+              "Value #Worker_Count": 1,
+              "Value #cost_per_cpu": 3
+            },
+            "renameByName": {
+              "Time": "",
+              "Value #CPU_Cost": "CPU Cost / Month",
+              "Value #Cpu_Cores": "Total CPU Cores",
+              "Value #Tenant_request_total": "Tenant Request Total Price",
+              "Value #Tenant_request_total_cost": "Tenant Request Total Cost / Month",
+              "Value #Worker_Count": "Worker Nodes",
+              "Value #cost_per_cpu": "Cost per CPU",
+              "Value #tenant_request_total": "Tenant Request Total"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "Margin Tenant / Month",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": -1
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "Kr"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "d89676d4-bbde-4f01-8d2a-4285e081beac"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"}) * ${worker_cpu_cost_ok_for_tenants}-sum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"}) * ${worker_cpu_cost_ok}",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Margin Tenant / Month",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Income per CPU"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "unit",
+                "value": "Kr"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Requested CPU by Tenants"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Income / Month"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "unit",
+                "value": "Kr"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cost per CPU"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kr"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 16,
+        "x": 0,
+        "y": 6
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(openshift_clusterresourcequota_created{})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "number_of_tenants"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "tenant_tot_cpu_request"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "${worker_cpu_cost_ok_for_tenants}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "cost_per_cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_node_status_capacity{resource=\"cpu\", node=~\".*worker.*\"}) * ${worker_cpu_cost_ok_for_tenants}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "total_income"
+        }
+      ],
+      "title": "Application Income",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #tenant_request_total": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #cost_per_cpu": 3,
+              "Value #number_of_tenants": 1,
+              "Value #tenant_tot_cpu_request": 2,
+              "Value #total_income": 4
+            },
+            "renameByName": {
+              "Time": "",
+              "Value #CPU_Cost": "CPU Cost / Month",
+              "Value #Cpu_Cores": "CPU Cores",
+              "Value #Tenant_request_total": "Tenant Request Total Price",
+              "Value #Tenant_request_total_cost": "Tenant Request Total Cost / Month",
+              "Value #Worker_Count": "Worker Nodes",
+              "Value #cost_per_cpu": "Income per CPU",
+              "Value #number_of_tenants": "Tenants",
+              "Value #tenant_request_total": "Tenant Request Total",
+              "Value #tenant_tot_cpu_request": "Requested CPU by Tenants",
+              "Value #total_income": "Total Income / Month"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Tenant"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #quota-request-cpu"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Tenant CPU Req"
+              },
+              {
+                "id": "unit",
+                "value": "Cores"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #quota-request-used-cpu"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "App CPU Req"
+              },
+              {
+                "id": "unit",
+                "value": "Cores"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #Tenant Cost"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Tenant Price / Month"
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "unit",
+                "value": "Kr"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Used (from tenant request)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 271
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory Used (from tenant requests)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 291
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "App Usage Price / Month"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "unit",
+                "value": "Kr"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Margin / Month"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "unit",
+                "value": "Kr"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 21,
+        "w": 20,
+        "x": 0,
+        "y": 11
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Margin / Month"
+          }
+        ]
+      },
+      "pluginVersion": "10.4.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "quota-request-cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"used\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "quota-request-used-cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"}) * ${worker_cpu_cost_ok_for_tenants}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Tenant Cost"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"used\"}) * ${worker_cpu_cost_ok_for_tenants} ",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Usage_price_per_moth"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"}) * ${worker_cpu_cost_ok_for_tenants}\n-\nsum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"used\"}) * ${worker_cpu_cost_ok_for_tenants} ",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Revenue"
+        }
+      ],
+      "title": "Tenant Stats",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #Used memory requests": 6,
+              "Value #Used of CPU Request": 3,
+              "Value #quota-request-cpu": 4,
+              "Value #quota-request-memory": 7,
+              "Value #quota-request-used-cpu": 2,
+              "Value #quota-request-used-memory": 5,
+              "name": 1
+            },
+            "renameByName": {
+              "Value #Revenue": "Margin / Month",
+              "Value #Tenant Cost": "",
+              "Value #Usage_price_per_moth": "App Usage Price / Month"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "poseidon-ok-test-1-datasource",
+          "value": "d89676d4-bbde-4f01-8d2a-4285e081beac"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "1100",
+          "value": "1100"
+        },
+        "description": "",
+        "hide": 0,
+        "label": "Worker CPU Cost",
+        "name": "worker_cpu_cost_ok",
+        "options": [
+          {
+            "selected": true,
+            "text": "1100",
+            "value": "1100"
+          }
+        ],
+        "query": "1100",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "1500",
+          "value": "1500"
+        },
+        "description": "",
+        "hide": 0,
+        "label": "Tenant CPU Cost",
+        "name": "worker_cpu_cost_ok_for_tenants",
+        "options": [
+          {
+            "selected": true,
+            "text": "1500",
+            "value": "1500"
+          }
+        ],
+        "query": "1500",
+        "skipUrlSync": false,
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Cost Managment Platform",
+  "uid": "fe34rvqigkoaoc",
+  "version": 26,
+  "weekStart": ""
+}
