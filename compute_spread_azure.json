@@ -1596,8 +1596,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1674,8 +1673,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "blue",
-                      "value": null
+                      "color": "blue"
                     },
                     {
                       "color": "green",
@@ -1737,8 +1735,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "dark-green",
-                      "value": null
+                      "color": "dark-green"
                     },
                     {
                       "color": "semi-dark-green",
@@ -1982,8 +1979,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2060,8 +2056,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "blue",
-                      "value": null
+                      "color": "blue"
                     },
                     {
                       "color": "green",
@@ -2123,8 +2118,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "dark-green",
-                      "value": null
+                      "color": "dark-green"
                     },
                     {
                       "color": "semi-dark-green",
@@ -2368,8 +2362,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2446,8 +2439,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "blue",
-                      "value": null
+                      "color": "blue"
                     },
                     {
                       "color": "green",
@@ -2509,8 +2501,7 @@
                   "mode": "percentage",
                   "steps": [
                     {
-                      "color": "dark-green",
-                      "value": null
+                      "color": "dark-green"
                     },
                     {
                       "color": "semi-dark-green",
@@ -2732,9 +2723,7 @@
     }
   ],
   "schemaVersion": 39,
-  "tags": [
-    "Tenant"
-  ],
+  "tags": [],
   "templating": {
     "list": [
       {
@@ -2765,6 +2754,6 @@
   "timezone": "browser",
   "title": "Cluster Resources",
   "uid": "ee1n2buad3x8gf",
-  "version": 38,
+  "version": 39,
   "weekStart": ""
 }
