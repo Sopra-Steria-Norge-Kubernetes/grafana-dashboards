@@ -19,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 53,
+  "id": 44,
   "links": [],
   "panels": [
     {
@@ -29,6 +29,679 @@
         "w": 24,
         "x": 0,
         "y": 0
+      },
+      "id": 39,
+      "panels": [],
+      "title": "Revised Queries",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "description": "Hvor mange % som forsvinner til admin overhead på 16vCPU worker noder.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 15
+              },
+              {
+                "color": "red",
+                "value": 18
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 56,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-16.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-16.*\", resource=\"cpu\"})\n)\n* 100",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Admin Ressurser - 16vCPU",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "name": "${datasource}",
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "Amount of worker nodes available for customer tenants",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Tenant Nodes",
+              "url": "https://${grafana_url}﻿/d/ee1n2buad3x8gf/tenant-nodes?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(kube_node_info{node=~\".*worker-16.*\"})",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "16vCPU - Worker Nodes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 8,
+        "y": 1
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-0.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total Cores Available",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 25
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "green",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 13,
+        "y": 1
+      },
+      "id": 33,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-0.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))\n-\n(sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"}))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cores left on workers",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 80
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 17,
+        "y": 1
+      },
+      "id": 36,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\n(\n  (\n    (sum(kube_node_status_allocatable{node=~\".*worker-0.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n    + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  ) \n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100) \n)\n* 100",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Requested / Available",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "description": "Hvor mange % som forsvinner til admin overhead på 8vCPU worker noder.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 15
+              },
+              {
+                "color": "red",
+                "value": 18
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 4
+      },
+      "id": 57,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-0.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-0.*\", resource=\"cpu\"})\n)\n* 100 or on() vector(0)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Admin Ressurser - 8 vCPU",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "name": "${datasource}",
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "targetBlank": false,
+              "title": "Tenant Details",
+              "url": "https://${grafana_url}/d/be1n0z842rzswa/tenant-specifics?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 4
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(kube_node_info{node=~\".*worker-0.*\"}) or on() vector(0)",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "8vCPU - Worker Nodes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 8,
+        "y": 4
+      },
+      "id": 35,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total Cores Requested",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.4,
+            "drawStyle": "line",
+            "fillOpacity": 29,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 21,
+        "x": 0,
+        "y": 7
+      },
+      "hideTimeOverride": false,
+      "id": 55,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "now-30d",
+      "title": "Total Cores Requested",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
       },
       "id": 3,
       "panels": [],
@@ -70,9 +743,9 @@
         "h": 4,
         "w": 2,
         "x": 0,
-        "y": 1
+        "y": 16
       },
-      "id": 1,
+      "id": 38,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -90,12 +763,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -148,9 +821,9 @@
         "h": 4,
         "w": 3,
         "x": 2,
-        "y": 1
+        "y": 16
       },
-      "id": 2,
+      "id": 37,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -168,12 +841,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -217,7 +890,7 @@
         "h": 4,
         "w": 5,
         "x": 5,
-        "y": 1
+        "y": 16
       },
       "id": 4,
       "options": {
@@ -237,12 +910,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -286,7 +959,7 @@
         "h": 4,
         "w": 5,
         "x": 10,
-        "y": 1
+        "y": 16
       },
       "id": 5,
       "options": {
@@ -306,12 +979,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -363,7 +1036,7 @@
         "h": 8,
         "w": 5,
         "x": 0,
-        "y": 5
+        "y": 20
       },
       "id": 18,
       "options": {
@@ -381,12 +1054,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "expr": "sum(sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{resource=\"cpu\", node=~\".*worker.*\"}) by (node))\n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"cpu\"})\n* 100",
@@ -438,7 +1111,7 @@
         "h": 8,
         "w": 5,
         "x": 5,
-        "y": 5
+        "y": 20
       },
       "id": 27,
       "options": {
@@ -456,15 +1129,15 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\nsum(kube_node_status_capacity{node=~\".*worker.*\", resource=\"cpu\"})\n* 100",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\n(sum(kube_node_status_allocatable{node=~\".*worker-.*\", resource=\"cpu\"})) \n* 100",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -512,7 +1185,7 @@
         "h": 8,
         "w": 5,
         "x": 10,
-        "y": 5
+        "y": 20
       },
       "id": 28,
       "options": {
@@ -530,12 +1203,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "expr": "sum(avg_over_time(instance:node_cpu:rate:sum{instance=~'.*worker.*'}[60m])) \n/ \nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"cpu\"}) \n* 100",
@@ -586,7 +1259,7 @@
         "h": 8,
         "w": 5,
         "x": 0,
-        "y": 13
+        "y": 28
       },
       "id": 30,
       "options": {
@@ -604,12 +1277,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "expr": "sum(sum(kube_pod_resource_request{node=~\".*worker.*\",resource='memory'} /1014/1024/1024) by (node)) \n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) \n* 100",
@@ -660,7 +1333,7 @@
         "h": 8,
         "w": 5,
         "x": 5,
-        "y": 13
+        "y": 28
       },
       "id": 31,
       "options": {
@@ -678,12 +1351,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"hard\"} /1024/1024/1024)\n/\nsum(kube_node_status_capacity{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) \n* 100",
@@ -734,7 +1407,7 @@
         "h": 8,
         "w": 5,
         "x": 10,
-        "y": 13
+        "y": 28
       },
       "id": 29,
       "options": {
@@ -752,12 +1425,12 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_POSEIDON-OK-TEST-1-DATASOURCE}"
+            "uid": "cluster-local-prometheus"
           },
           "editorMode": "code",
           "expr": "((sum(node_memory_MemTotal_bytes{instance=~\".*worker.*\"}) - sum(node_memory_MemAvailable_bytes{instance=~\".*worker.*\"})) / 1024 / 1024 / 1024)  \n/ \nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) * 100",
@@ -779,7 +1452,7 @@
         "h": 7,
         "w": 5,
         "x": 0,
-        "y": 21
+        "y": 36
       },
       "id": 32,
       "options": {
@@ -797,7 +1470,7 @@
           "Tenant"
         ]
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.5.2",
       "title": "Tenant Dashboards",
       "type": "dashlist"
     }
@@ -809,8 +1482,8 @@
     "list": [
       {
         "current": {
-          "text": "poseidon-ok-test-1-datasource",
-          "value": "d89676d4-bbde-4f01-8d2a-4285e081beac"
+          "text": "cluster-local-prometheus",
+          "value": "cluster-local-prometheus"
         },
         "includeAll": false,
         "label": "Datasource",
@@ -823,8 +1496,8 @@
       },
       {
         "current": {
-          "text": "operations-grafana.apps.test-1.cp.oslo.kommune.no",
-          "value": "operations-grafana.apps.test-1.cp.oslo.kommune.no"
+          "text": "operations-grafana.apps.prod-1.cp.oslo.kommune.no",
+          "value": "operations-grafana.apps.prod-1.cp.oslo.kommune.no"
         },
         "datasource": {
           "type": "prometheus",
@@ -843,6 +1516,39 @@
         "refresh": 1,
         "regex": "",
         "type": "query"
+      },
+      {
+        "current": {
+          "text": "13.4",
+          "value": "13.4"
+        },
+        "description": "",
+        "name": "query16vcpu",
+        "options": [
+          {
+            "selected": true,
+            "text": "13.4",
+            "value": "13.4"
+          }
+        ],
+        "query": "13.4",
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "text": "25.5",
+          "value": "25.5"
+        },
+        "name": "query8vcpu",
+        "options": [
+          {
+            "selected": true,
+            "text": "25.5",
+            "value": "25.5"
+          }
+        ],
+        "query": "25.5",
+        "type": "textbox"
       }
     ]
   },
@@ -852,8 +1558,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Cluster Tenant Overview",
-  "uid": "ae2xmv1bzxzb4a",
-  "version": 8,
+  "title": "Cluster Tenant Overview NEW COPY",
+  "uid": "eecncyk4wf0g0a",
+  "version": 25,
   "weekStart": ""
 }
