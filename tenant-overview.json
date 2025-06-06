@@ -19,7 +19,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 44,
+  "id": 30,
   "links": [],
   "panels": [
     {
@@ -51,8 +51,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -92,7 +91,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
@@ -128,8 +127,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -164,7 +162,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -198,8 +196,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "green",
@@ -235,11 +232,11 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-0.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))",
+          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-8.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -263,8 +260,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "red",
@@ -308,11 +304,11 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-0.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))\n-\n(sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"}))",
+          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-8.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))\n-\n(sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -336,8 +332,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -379,11 +374,11 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\n(\n  (\n    (sum(kube_node_status_allocatable{node=~\".*worker-0.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n    + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  ) \n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100) \n)\n* 100",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\n(\n  (\n    (sum(kube_node_status_allocatable{node=~\".*worker-8.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n    + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  ) \n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100) \n)\n* 100",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -408,8 +403,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -449,11 +443,11 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-0.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-0.*\", resource=\"cpu\"})\n)\n* 100 or on() vector(0)",
+          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-8.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-8.*\", resource=\"cpu\"})\n)\n* 100 or on() vector(0)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -485,8 +479,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -517,7 +510,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -526,7 +519,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(kube_node_info{node=~\".*worker-0.*\"}) or on() vector(0)",
+          "expr": "count(kube_node_info{node=~\".*worker-8.*\"}) or on() vector(0)",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
@@ -551,8 +544,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
-                "value": null
+                "color": "blue"
               }
             ]
           },
@@ -584,7 +576,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
@@ -649,8 +641,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
-                "value": null
+                "color": "blue"
               }
             ]
           },
@@ -679,7 +670,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "editorMode": "code",
@@ -731,8 +722,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -763,7 +753,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -805,8 +795,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -841,7 +830,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -877,8 +866,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -910,7 +898,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -946,8 +934,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -979,7 +966,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1015,8 +1002,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "semi-dark-green",
-                "value": null
+                "color": "semi-dark-green"
               },
               {
                 "color": "#EAB839",
@@ -1054,7 +1040,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1090,8 +1076,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "yellow",
-                "value": null
+                "color": "yellow"
               },
               {
                 "color": "green",
@@ -1129,7 +1114,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1164,8 +1149,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -1203,7 +1187,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1238,8 +1222,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -1277,7 +1260,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1312,8 +1295,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -1351,7 +1333,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1386,8 +1368,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -1425,7 +1406,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -1470,13 +1451,13 @@
           "Tenant"
         ]
       },
-      "pluginVersion": "11.5.2",
+      "pluginVersion": "11.6.0",
       "title": "Tenant Dashboards",
       "type": "dashlist"
     }
   ],
   "preload": false,
-  "schemaVersion": 40,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
@@ -1496,8 +1477,8 @@
       },
       {
         "current": {
-          "text": "operations-grafana.apps.prod-1.cp.oslo.kommune.no",
-          "value": "operations-grafana.apps.prod-1.cp.oslo.kommune.no"
+          "text": "operations-grafana.apps.test-1.cp.oslo.kommune.no",
+          "value": "operations-grafana.apps.test-1.cp.oslo.kommune.no"
         },
         "datasource": {
           "type": "prometheus",
@@ -1559,7 +1540,6 @@
   "timepicker": {},
   "timezone": "browser",
   "title": "Cluster Tenant Overview",
-  "uid": "eecncyk4wf0g0a",
-  "version": 25,
-  "weekStart": ""
+  "uid": "beo4on71pyvb4b",
+  "version": 2
 }
