@@ -1,0 +1,1733 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 35,
+  "links": [],
+  "panels": [
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# Tenant Overview - ${tenant}\n\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.0.2",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 20,
+      "panels": [],
+      "title": "Disclaimers",
+      "type": "row"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 18,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"font-family: sans-serif; color: #ffffff; background-color: #1e1e1e; padding: 20px; border-radius: 8px;\">\n  <h1 style=\"color: #f97316; font-size: 24px\">⚙️ Resource Optimization</h1>\n\n  <div style=\"margin-bottom: 20px; padding: 12px 0; border-bottom: 1px solid #4b5563;\">\n    <p style=\"font-size: 13px; line-height: 1.8;\">\n      <strong style=\"color: grey\">vCPU price (NOK):</strong> Cost per virtual CPU in Norwegian kroner, used to calculate resource cost.<br>\n      <strong style=\"color: grey\">CPU percentile:</strong> The percentile used to calculate recommended CPU requests. <br>\n      <strong style=\"color: grey\">Overhead percentage:</strong> A percentage added on top of the CPU percentile to account for variation and buffer.\n    </p>\n  </div>\n\n  <div style=\"border-left: 4px solid #ef4444; background-color: #2a2a2a; padding: 16px; margin-bottom: 20px;\">\n    <h2 style=\"color: #ef4444; font-size: 22px\">‼️ Important information:</h2>\n\n    <ul style=\"line-height: 1.6; font-size: 15px;\">\n      <li>\n        All recommendations are based on measurements of actual resource usage for the containers over a defined period (X), evaluated using the <strong>95th percentile</strong>.\n        <ul>\n          <li style=\"margin-top: 5px;\">\n            <em>For CPU, we set a request at the 95th percentile with no limit. Meaning, in 95% of the cases, your CPU request will be sufficient. For the remaining 5%, we set no limit. This means your pod can burst and use any CPU available on the node – e.g. CPU that other pods requested but aren’t using right now.</em>\n          </li>\n        </ul>\n      </li>\n\n      <li>Usage patterns may vary significantly between <strong>test and production environments</strong>, and this should be taken into account when setting threshold values for resource allocation.</li>\n\n      <li>For certain <strong>third-party services</strong>, alternative guidelines for resource usage may apply. In such cases, the vendor’s recommendations must be followed.</li>\n\n      <li>Different <strong>programming languages and runtime environments</strong> may handle resource requests and limits differently. It is therefore recommended to consult the relevant documentation for the specific language before using the measurement data as a basis for configuration.</li>\n    </ul>\n  </div>\n\n  <h5 style=\"color: #f3f4f6; margin-bottom: 8px;\">More information:</h5>\n  <ul style=\"list-style-type: none; padding-left: 0; font-size: 14px; line-height: 1.8;\">\n    <li><a href=\"https://sopra-steria-norge-kubernetes.github.io/OpenShift/OpenShift%20Teams/Team%20features/observability/\" style=\"color: #38bdf8; text-decoration: none;\">- Sopra Steria - Developer Teams Observability</a></li>\n    <li><a href=\"https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/\" style=\"color: #38bdf8; text-decoration: none;\">- Kubernetes - Resource Management for Pods and Containers</a></li>\n    <li><a href=\"https://sysdig.com/blog/kubernetes-limits-requests/\" style=\"color: #38bdf8; text-decoration: none;\">- Sysdig - Understanding Kubernetes Limits and Requests</a></li>\n  </ul>\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "12.0.2",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 19,
+      "panels": [],
+      "title": "Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "targetBlank": false,
+              "title": "Tenant Details",
+              "url": "https://${grafana_url}/d/be1n0z842rzswa/tenant-specifics?orgId=1"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 0,
+        "y": 19
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"})",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Namespaces",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 3,
+        "y": 19
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(\n  openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\", name=~\"${tenant}\"}\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Hard Requests Quota (CPU)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 7,
+        "y": 19
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", name=~\"${tenant}\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Used Requests Quota (CPU)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 11,
+        "y": 19
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", name=~\"${tenant}\"})\n-\nsum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", name=~\"${tenant}\"})",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Left requests quota (CPU)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "description": "Historical view of total CPU cost for ${teamName}",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "NOK",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "kr"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 9,
+        "x": 15,
+        "y": 19
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", name=~\"$tenant\"})* $vcpuprice",
+          "legendFormat": "Total CPU cost",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "now-30d",
+      "title": "Total CPU Cost (NOK)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "description": "Total CPU cost of the Hard request quota",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue"
+              },
+              {
+                "color": "green",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Kr"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 3,
+        "y": 22
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", name=~\"${tenant}\"}) * $vcpuprice",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total CPU cost (NOK)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Kr"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Optimized Request"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Cores"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pod"
+            },
+            "properties": []
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Savings"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.00001
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "NaN": {
+                        "color": "text",
+                        "index": 0,
+                        "text": "NaN"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "NOK Savings"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Kr"
+              },
+              {
+                "id": "decimals"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.00001
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "NaN": {
+                        "color": "text",
+                        "index": 0,
+                        "text": "NaN"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Workload"
+            },
+            "properties": []
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "owner_kind"
+            },
+            "properties": []
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Request"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 3
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 7,
+        "y": 22
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "clamp_min(\n  quantile_over_time(\n  ${cpupercentile},\n  avg by (namespace, owner_name, container) (\n    rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])\n    * on(namespace) group_left()\n      kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n    * on(namespace, pod) group_left(owner_name)\n      kube_pod_owner{owner_is_controller=~\"true\"}\n  )[1h:] \n) \n* ${percentage},\n0.01\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Usage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg by (namespace, owner_name) (\n  kube_pod_container_resource_requests{resource=\"cpu\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Request"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count by (namespace, owner_name) (\n  kube_pod_info\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "replicas"
+        }
+      ],
+      "title": "Potential Monthly Savings (NOK)",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #Usage": false,
+              "container": true,
+              "endpoint": true,
+              "job": true,
+              "node": true,
+              "owner_kind": true,
+              "pod": true,
+              "prometheus": true,
+              "resource": true,
+              "service": true,
+              "uid": true,
+              "unit": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #Request": 7,
+              "Value #Usage": 6,
+              "Value #optimized": 8,
+              "container": 4,
+              "namespace": 1,
+              "owner_kind": 2,
+              "owner_name": 3,
+              "pod": 5
+            },
+            "renameByName": {
+              "Value": "",
+              "Value #A": "CPU Request",
+              "Value #B": "Potential savings",
+              "Value #Request": "CPU Request",
+              "Value #Usage": "Optimized Request",
+              "Value #optimized": "Optimized Request",
+              "container": "Container",
+              "namespace": "Namespace",
+              "owner_kind": "",
+              "owner_name": "Workload",
+              "pod": "Pod"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CPU Savings per pod",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Request"
+                }
+              },
+              "operator": "-",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Optimized Request"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Request",
+                "Optimized Request"
+              ],
+              "reducer": "diff"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CPU Savings",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Savings per pod"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #replicas"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "NOK Savings",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Savings"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "$vcpuprice"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cluster-local-prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "color-text"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "decimals": 3,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Cores"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Optimized CPU"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Cores"
+              },
+              {
+                "id": "decimals",
+                "value": 3
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 167
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pod"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 332
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Savings"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.00001
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "NaN": {
+                        "color": "text",
+                        "index": 0,
+                        "text": "NaN"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "NOK Savings"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Kr"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "green",
+                      "value": -0.00009
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "NaN": {
+                        "color": "text",
+                        "index": 0,
+                        "text": "NaN"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Workload"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 332
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "owner_kind"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 132
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Request"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 3
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pods"
+            },
+            "properties": [
+              {
+                "id": "unit"
+              },
+              {
+                "id": "decimals"
+              },
+              {
+                "id": "custom.width",
+                "value": 70
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Savings per pod"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Namespace"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 203
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory Request"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Mi"
+              },
+              {
+                "id": "decimals"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 152
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Optimized Memory"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Mi"
+              },
+              {
+                "id": "decimals"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 169
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory Savings"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Mi"
+              },
+              {
+                "id": "decimals"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "green",
+                      "value": 0.00001
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Container"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 217
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 24,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 17,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [
+            "CPU Savings",
+            "NOK Savings",
+            "Value #optimized",
+            "Memory Savings"
+          ],
+          "reducer": [
+            "sum"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "CPU Savings"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "clamp_min(\n  quantile_over_time(\n  ${cpupercentile},\n  avg by (namespace, owner_name, container) (\n    rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])\n    * on(namespace) group_left()\n      kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n    * on(namespace, pod) group_left(owner_name)\n      kube_pod_owner{owner_is_controller=~\"true\"}\n  )[1h:] \n) \n* ${percentage},\n0.01\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Usage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg by (namespace, owner_name) (\n  kube_pod_container_resource_requests{resource=\"cpu\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Request"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count by (namespace, owner_name) (\n  kube_pod_info\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "replicas"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(kube_pod_container_resource_requests{resource=\"memory\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}) /1024/1024",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "request-memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cluster-local-prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "clamp_min(\n  (sum by (namespace, owner_name) (\n    max_over_time(container_memory_working_set_bytes{container!=\"\"}[1h:])\n      * on(namespace) group_left()\n        kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n      * on(namespace, pod) group_left(owner_name, owner_kind)\n        kube_pod_owner{owner_is_controller=\"true\", owner_kind!=\"Job\"}\n  ) / 1024 / 1024) * 1.15,\n  50\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "usage-memory"
+        }
+      ],
+      "title": "All CPU consuming workloads",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #A": false,
+              "Value #Old usage": true,
+              "Value #Request": false,
+              "Value #Usage": false,
+              "Value #old": false,
+              "Value #optimized": true,
+              "Value #request-memory": false,
+              "container": false,
+              "endpoint": true,
+              "job": true,
+              "node": true,
+              "owner_kind": true,
+              "pod": true,
+              "prometheus": true,
+              "resource": true,
+              "service": true,
+              "uid": true,
+              "unit": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #Request": 5,
+              "Value #Usage": 6,
+              "Value #replicas": 3,
+              "Value #request-memory": 7,
+              "container": 4,
+              "endpoint": 8,
+              "job": 9,
+              "namespace": 1,
+              "node": 10,
+              "owner_kind": 11,
+              "owner_name": 2,
+              "pod": 12,
+              "prometheus": 13,
+              "resource": 14,
+              "service": 15,
+              "uid": 16,
+              "unit": 17
+            },
+            "renameByName": {
+              "Value": "",
+              "Value #A": "CPU Request",
+              "Value #B": "Potential savings",
+              "Value #Old usage": "Old Usage",
+              "Value #Request": "CPU Request",
+              "Value #Usage": "Optimized Request",
+              "Value #old": "only 95",
+              "Value #optimized": "",
+              "Value #replicas": "Pods",
+              "Value #request-memory": "Memory Request",
+              "Value #usage-memory": "Optimized Memory",
+              "container": "Container",
+              "namespace": "Namespace",
+              "owner_kind": "",
+              "owner_name": "Workload",
+              "pod": "Pod"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CPU Savings per pod",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Request"
+                }
+              },
+              "operator": "-",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Optimized Request"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Request",
+                "Optimized Request"
+              ],
+              "reducer": "diff"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CPU Savings",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Savings per pod"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Pods"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Memory Savings",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Memory Request"
+                }
+              },
+              "operator": "-",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Optimized Memory"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "NOK Savings",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CPU Savings"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "$vcpuprice"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "CPU Savings": false,
+              "CPU Savings per pod": false,
+              "Memory Savings": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "CPU Request": 4,
+              "CPU Savings": 6,
+              "CPU Savings per pod": 10,
+              "Container": 3,
+              "Memory Request": 7,
+              "Memory Savings": 9,
+              "Namespace": 0,
+              "Optimized Memory": 8,
+              "Optimized Request": 5,
+              "Pods": 2,
+              "Workload": 1
+            },
+            "renameByName": {
+              "Optimized Request": "Optimized CPU"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "hel-boligvirkemidler",
+          "value": "hel-boligvirkemidler"
+        },
+        "definition": "label_values(kube_namespace_labels,label_soprasteria_tenant)",
+        "label": "Tenant",
+        "name": "tenant",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(kube_namespace_labels,label_soprasteria_tenant)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "0",
+          "value": "0"
+        },
+        "description": "",
+        "label": "vCPU price (NOK)",
+        "name": "vcpuprice",
+        "options": [
+          {
+            "selected": true,
+            "text": "0",
+            "value": "0"
+          }
+        ],
+        "query": "0",
+        "type": "textbox"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "0.95",
+          "value": "0.95"
+        },
+        "label": "CPU Percentile",
+        "name": "cpupercentile",
+        "options": [
+          {
+            "selected": true,
+            "text": "95%",
+            "value": "0.95"
+          },
+          {
+            "selected": false,
+            "text": "90%",
+            "value": "0.9"
+          },
+          {
+            "selected": false,
+            "text": "85%",
+            "value": "0.85"
+          },
+          {
+            "selected": false,
+            "text": "80%",
+            "value": "0.8"
+          },
+          {
+            "selected": false,
+            "text": "75%",
+            "value": "0.75"
+          },
+          {
+            "selected": false,
+            "text": "70%",
+            "value": "0.7"
+          }
+        ],
+        "query": "95% : 0.95, 90% : 0.9, 85% : 0.85, 80% : 0.8, 75% : 0.75, 70% : 0.7",
+        "type": "custom"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "1",
+          "value": "1"
+        },
+        "label": "Overhead percentage",
+        "name": "percentage",
+        "options": [
+          {
+            "selected": true,
+            "text": "0%",
+            "value": "1"
+          },
+          {
+            "selected": false,
+            "text": "5%",
+            "value": "1.05"
+          },
+          {
+            "selected": false,
+            "text": "10%",
+            "value": "1.10"
+          },
+          {
+            "selected": false,
+            "text": "15%",
+            "value": "1.15"
+          },
+          {
+            "selected": false,
+            "text": "20%",
+            "value": "1.20"
+          }
+        ],
+        "query": "0% : 1, 5% : 1.05, 10% : 1.10, 15% : 1.15, 20% : 1.20",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Resource Optimization",
+  "uid": "048ee644-abf5-4971-ba8d-c754e1973468",
+  "version": 56
+}
