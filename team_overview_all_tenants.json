@@ -1514,7 +1514,7 @@
         "options": [],
         "query": "prometheus",
         "refresh": 1,
-        "regex": "",
+        "regex": "/local|metrics/",
         "type": "datasource"
       },
       {
@@ -1586,5 +1586,5 @@
   "timezone": "browser",
   "title": "Team Overview All Tenants",
   "uid": "1619edad-97c2-4ce5-922c-7d7bf01fd61b",
-  "version": 43
+  "version": 44
 }
