@@ -52,7 +52,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -107,7 +107,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1586,5 +1586,5 @@
   "timezone": "browser",
   "title": "Team Overview All Tenants",
   "uid": "1619edad-97c2-4ce5-922c-7d7bf01fd61b",
-  "version": 42
+  "version": 43
 }
