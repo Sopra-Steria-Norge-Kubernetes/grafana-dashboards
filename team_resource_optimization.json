@@ -103,7 +103,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -158,7 +158,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -175,7 +175,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -224,7 +224,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "expr": "sum(\n  openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\", name=~\"${tenant}\"}\n)",
@@ -240,7 +240,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -304,7 +304,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -353,7 +353,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", name=~\"${tenant}\"})\n-\nsum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", name=~\"${tenant}\"})",
@@ -369,7 +369,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "description": "Historical view of total CPU cost for ${teamName}",
       "fieldConfig": {
@@ -470,7 +470,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "description": "Total CPU cost of the Hard request quota",
       "fieldConfig": {
@@ -539,7 +539,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -725,7 +725,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -740,7 +740,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -755,7 +755,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -914,7 +914,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1314,7 +1314,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1330,7 +1330,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1345,7 +1345,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1360,7 +1360,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1375,7 +1375,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1602,6 +1602,18 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "cluster-local-prometheus",
+          "value": "cluster-local-prometheus"
+        },
+        "name": "Datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
         "allowCustomValue": false,
         "current": {
           "text": "hel-boligvirkemidler",
@@ -1729,5 +1741,5 @@
   "timezone": "browser",
   "title": "Resource Optimization",
   "uid": "048ee644-abf5-4971-ba8d-c754e1973468",
-  "version": 57
+  "version": 59
 }
