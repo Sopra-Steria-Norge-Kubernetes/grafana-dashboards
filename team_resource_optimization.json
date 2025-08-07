@@ -1610,7 +1610,7 @@
         "options": [],
         "query": "prometheus",
         "refresh": 1,
-        "regex": "",
+        "regex": "/local|metrics/",
         "type": "datasource"
       },
       {
@@ -1741,5 +1741,5 @@
   "timezone": "browser",
   "title": "Resource Optimization",
   "uid": "048ee644-abf5-4971-ba8d-c754e1973468",
-  "version": 59
+  "version": 60
 }
