@@ -15,450 +15,42 @@
       }
     ]
   },
-  "description": "Shows cluster wide information about tenant usage",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 30,
+  "id": 33,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "gridPos": {
-        "h": 1,
+        "h": 2,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 39,
-      "panels": [],
-      "title": "Revised Queries",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "cluster-local-prometheus"
-      },
-      "description": "Hvor mange % som forsvinner til admin overhead på 16vCPU worker noder.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "yellow",
-                "value": 15
-              },
-              {
-                "color": "red",
-                "value": 18
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 0,
-        "y": 1
-      },
-      "id": 56,
+      "id": 31,
+      "maxPerRow": 2,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "content": "# Cost Overview - ${teamName}\n\n",
+        "mode": "markdown"
       },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-16.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-16.*\", resource=\"cpu\"})\n)\n* 100",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Admin Ressurser - 16vCPU",
-      "type": "stat"
+      "pluginVersion": "12.0.2",
+      "title": "",
+      "transparent": true,
+      "type": "text"
     },
     {
       "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Amount of worker nodes available for customer tenants",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "links": [
-            {
-              "title": "Tenant Nodes",
-              "url": "https://${grafana_url}﻿/d/ee1n2buad3x8gf/tenant-nodes?orgId=1"
-            }
-          ],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 4,
-        "y": 1
-      },
-      "id": 2,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(kube_node_info{node=~\".*worker-16.*\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "16vCPU - Worker Nodes",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "cluster-local-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "green",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "cores"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 5,
-        "x": 8,
-        "y": 1
-      },
-      "id": 34,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-8.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Cores Available",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "cluster-local-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red"
-              },
-              {
-                "color": "red",
-                "value": 25
-              },
-              {
-                "color": "#EAB839",
-                "value": 40
-              },
-              {
-                "color": "green",
-                "value": 50
-              }
-            ]
-          },
-          "unit": "cores"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 13,
-        "y": 1
-      },
-      "id": 33,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "(\n  (sum(kube_node_status_allocatable{node=~\".*worker-8.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n  + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100))\n-\n(sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"}))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Cores left on workers",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "cluster-local-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "yellow",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 80
-              },
-              {
-                "color": "dark-red",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 17,
-        "y": 1
-      },
-      "id": 36,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\n(\n  (\n    (sum(kube_node_status_allocatable{node=~\".*worker-8.*\", resource=\"cpu\"}) * (100 - $query8vcpu) / 100)\n    + (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100)\n  ) \n  or (sum(kube_node_status_allocatable{node=~\".*worker-16.*\", resource=\"cpu\"}) * (100 - $query16vcpu) / 100) \n)\n* 100",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU Requested / Available",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "cluster-local-prometheus"
-      },
-      "description": "Hvor mange % som forsvinner til admin overhead på 8vCPU worker noder.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "yellow",
-                "value": 15
-              },
-              {
-                "color": "red",
-                "value": 18
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 4,
-        "x": 0,
-        "y": 4
-      },
-      "id": 57,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-8.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-8.*\", resource=\"cpu\"})\n)\n* 100 or on() vector(0)",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Admin Ressurser - 8 vCPU",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
         "type": "prometheus",
         "uid": "${datasource}"
       },
@@ -479,7 +71,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "blue"
               }
             ]
           }
@@ -488,11 +80,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
-        "x": 4,
-        "y": 4
+        "w": 3,
+        "x": 0,
+        "y": 2
       },
-      "id": 1,
+      "id": 21,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -510,30 +102,31 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(kube_node_info{node=~\".*worker-8.*\"}) or on() vector(0)",
+          "expr": "count(openshift_clusterresourcequota_created{})",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
           "refId": "A"
         }
       ],
-      "title": "8vCPU - Worker Nodes",
+      "title": "Number of Tenants",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
+      "description": "Total CPU cost of the Hard request quota",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -544,21 +137,25 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue"
+                "color": "light-blue"
+              },
+              {
+                "color": "green",
+                "value": 80
               }
             ]
           },
-          "unit": "cores"
+          "unit": "Kr"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 8,
-        "y": 4
+        "w": 8,
+        "x": 3,
+        "y": 2
       },
-      "id": 35,
+      "id": 25,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -576,40 +173,44 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
           "editorMode": "code",
-          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", cluster=\"$cluster\"}) * $vcpuprice",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Total Cores Requested",
+      "title": "Total CPU cost",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${Datasource}"
       },
+      "description": "Historical view of total CPU cost for ${teamName}",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "blue",
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
+            "axisLabel": "NOK",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "barWidthFactor": 0.4,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
-            "fillOpacity": 29,
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -622,11 +223,11 @@
               "fill": "solid"
             },
             "lineWidth": 1,
-            "pointSize": 1,
+            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -641,69 +242,85 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue"
+                "color": "text"
               }
             ]
           },
-          "unit": "cores"
+          "unit": "short"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 21,
-        "x": 0,
-        "y": 7
+        "h": 6,
+        "w": 13,
+        "x": 11,
+        "y": 2
       },
-      "hideTimeOverride": false,
-      "id": 55,
+      "id": 30,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
         },
         "tooltip": {
           "hideZeros": false,
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
           "editorMode": "code",
-          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
-          "interval": "",
-          "legendFormat": "__auto",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", cluster=\"$cluster\"})* $vcpuprice",
+          "legendFormat": "Total CPU cost",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", cluster=\"$cluster\"})",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "Used Request Quota",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", cluster=\"$cluster\"})\n-\nsum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", cluster=\"$cluster\"})",
+          "hide": true,
+          "instant": false,
+          "legendFormat": "Unused CPU",
+          "range": true,
+          "refId": "C"
         }
       ],
       "timeFrom": "now-30d",
-      "title": "Total Cores Requested",
-      "transparent": true,
+      "title": "Total CPU Cost (NOK)",
       "type": "timeseries"
     },
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 15
-      },
-      "id": 3,
-      "panels": [],
-      "title": "Cluster Tenant Overview",
-      "type": "row"
-    },
-    {
       "datasource": {
-        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -722,7 +339,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "blue"
               }
             ]
           }
@@ -730,12 +347,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 2,
+        "h": 3,
+        "w": 3,
         "x": 0,
-        "y": 16
+        "y": 5
       },
-      "id": 38,
+      "id": 23,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -753,43 +370,683 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${Datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count(openshift_clusterresourcequota_created{})",
+          "expr": "count(kube_namespace_labels{label_soprasteria_tenant=~\".*\"})",
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
           "refId": "A"
         }
       ],
-      "title": "Tenants",
+      "title": "Number of Namespaces",
       "type": "stat"
     },
     {
       "datasource": {
-        "name": "${datasource}",
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${Datasource}"
       },
-      "description": "Amount of worker nodes available for customer tenants",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "links": [
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "green",
+                "value": 30
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 70
+              },
+              {
+                "color": "#EAB839",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Kr"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 3,
+        "y": 5
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", cluster=\"$cluster\"}) * $vcpuprice)\n-\n((sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", cluster=\"$cluster\"})\n-\nsum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", cluster=\"$cluster\"}))\n* $vcpuprice)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cost - Used CPU",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red"
+              }
+            ]
+          },
+          "unit": "Kr"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 7,
+        "y": 5
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", cluster=\"$cluster\"})\n-\nsum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", cluster=\"$cluster\"}))\n* $vcpuprice",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cost - Overhead CPU",
+      "type": "stat"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 15,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## CPU\n\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.0.2",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 16,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## Memory\n\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.0.2",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 10
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\", cluster=\"$cluster\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Hard requests quota (CPU)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Cores"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 4,
+        "y": 10
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\", cluster=\"$cluster\"})",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Used requests quota (CPU)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
             {
-              "title": "Tenant Nodes",
-              "url": "https://${grafana_url}﻿/d/ee1n2buad3x8gf/tenant-nodes?orgId=1"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 8,
+        "y": 10
+      },
+      "id": 4,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "100 - (\n  sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"used\"}) \n  / \n  sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\",type=\"hard\"}) \n  * 100\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Waste - % of quota unused",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "gbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 12,
+        "y": 10
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.memory\",type=\"hard\"}) /1024/1024/1024",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Hard requests quota (Memory)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "gbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 10
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.memory\",type=\"used\"}) /1024/1024/1024",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Used requests quota (Memory)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#9ac48a"
+              },
+              {
+                "color": "#e5ac0e",
+                "value": 60
+              },
+              {
+                "color": "#d44a3a",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 10
+      },
+      "id": 7,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "expr": "100 - (\n  sum(openshift_clusterresourcequota_usage{resource=\"requests.memory\",type=\"used\"}) \n  / \n  sum(openshift_clusterresourcequota_usage{resource=\"requests.memory\",type=\"hard\"}) \n  * 100\n)",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Waste - % of quota unused",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -804,659 +1061,446 @@
             ]
           }
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 2,
-        "y": 16
-      },
-      "id": 37,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(kube_node_info{node=~\".*worker.*\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Worker Nodes",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "Total available memory on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
               {
-                "color": "green"
+                "id": "displayName",
+                "value": "Tenant"
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
               }
             ]
           },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 5,
-        "y": 16
-      },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(kube_node_status_capacity{resource=\"memory\", node=~\".*worker.*\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Memory",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "All Cores available on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #quota-request-cpu"
+            },
+            "properties": [
               {
-                "color": "green"
+                "id": "displayName",
+                "value": "Tenant CPU Req"
+              },
+              {
+                "id": "unit",
+                "value": "Cores"
               }
             ]
           },
-          "unit": "Cores"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 10,
-        "y": 16
-      },
-      "id": 5,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(kube_node_status_capacity{node=~\".*worker.*\", resource=\"cpu\"})",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Cores",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much CPU all running containers have requested against how much CPU that are allocatable on all workers.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #quota-request-used-cpu"
+            },
+            "properties": [
               {
-                "color": "semi-dark-green"
+                "id": "displayName",
+                "value": "App CPU Req"
               },
               {
-                "color": "#EAB839",
-                "value": 60
-              },
-              {
-                "color": "dark-red",
-                "value": 85
+                "id": "unit",
+                "value": "Cores"
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 0,
-        "y": 20
-      },
-      "id": 18,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{resource=\"cpu\", node=~\".*worker.*\"}) by (node))\n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"cpu\"})\n* 100",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU - Application Requested / Worker Total test",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much CPU all tenants have requested in the ClusterResoruceQuota against how much CPU that are availalbe on all workers.\n\nBelow 50% - Scale down worker node.\n\nAbove 67% - Scale up worker node.\n\nBetween - All good.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #Used of CPU Request"
+            },
+            "properties": [
               {
-                "color": "yellow"
+                "id": "displayName",
+                "value": "CPU Used (from tenant request)"
               },
               {
-                "color": "green",
-                "value": 50
+                "id": "unit",
+                "value": "percent"
               },
               {
-                "color": "dark-red",
-                "value": 67
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "orange",
+                      "value": 70
+                    },
+                    {
+                      "color": "red",
+                      "value": 85
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 95
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 5,
-        "y": 20
-      },
-      "id": 27,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\n(sum(kube_node_status_allocatable{node=~\".*worker-.*\", resource=\"cpu\"})) \n* 100",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU - Tenant Requests",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much CPU the containers are using against how much CPU that are allocatable on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #Price Per Tenant"
+            },
+            "properties": [
               {
-                "color": "green"
+                "id": "displayName",
+                "value": "Tenant Price / month"
               },
               {
-                "color": "#EAB839",
-                "value": 66
-              },
-              {
-                "color": "dark-red",
-                "value": 85
+                "id": "unit",
+                "value": "currencyNOK"
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 10,
-        "y": 20
-      },
-      "id": 28,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(avg_over_time(instance:node_cpu:rate:sum{instance=~'.*worker.*'}[60m])) \n/ \nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"cpu\"}) \n* 100",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU - Used / Allocatable",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much memory all running containers have requested against how much memory that are allocatable on all workers.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #quota-request-memory"
+            },
+            "properties": [
               {
-                "color": "green"
+                "id": "displayName",
+                "value": "Tenant Memory Req"
               },
               {
-                "color": "#EAB839",
-                "value": 66
-              },
-              {
-                "color": "dark-red",
-                "value": 85
+                "id": "unit",
+                "value": "decbytes"
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 0,
-        "y": 28
-      },
-      "id": 30,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(sum(kube_pod_resource_request{node=~\".*worker.*\",resource='memory'} /1014/1024/1024) by (node)) \n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) \n* 100",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory - Application Requested / Worker Total",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much memory all tenants have requested in the ClusterResoruceQuota against how much memory that are availalbe on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #Used memory requests"
+            },
+            "properties": [
               {
-                "color": "green"
+                "id": "displayName",
+                "value": "Memory Used (from tenant requests)"
               },
               {
-                "color": "#EAB839",
-                "value": 66
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
               },
               {
-                "color": "dark-red",
-                "value": 85
+                "id": "thresholds",
+                "value": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "orange",
+                      "value": 70
+                    },
+                    {
+                      "color": "red",
+                      "value": 85
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 95
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 100
+              },
+              {
+                "id": "unit",
+                "value": "percent"
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 5,
-        "y": 28
-      },
-      "id": 31,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"hard\"} /1024/1024/1024)\n/\nsum(kube_node_status_capacity{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) \n* 100",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory - Tenant Requests",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "name": "${datasource}",
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "description": "How much memory the containers are using against how much memory that are allocatable on all workers",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #quota-request-used-memory"
+            },
+            "properties": [
               {
-                "color": "green"
+                "id": "unit",
+                "value": "decbytes"
               },
               {
-                "color": "#EAB839",
-                "value": 66
-              },
-              {
-                "color": "dark-red",
-                "value": 85
+                "id": "displayName",
+                "value": "App Memory Req"
               }
             ]
           },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 10,
-        "y": 28
-      },
-      "id": 29,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": true,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.6.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Used (from tenant request)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 271
+              }
+            ]
           },
-          "editorMode": "code",
-          "expr": "((sum(node_memory_MemTotal_bytes{instance=~\".*worker.*\"}) - sum(node_memory_MemAvailable_bytes{instance=~\".*worker.*\"})) / 1024 / 1024 / 1024)  \n/ \nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) * 100",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory - Used / Requested",
-      "type": "gauge"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 5,
-        "x": 0,
-        "y": 36
-      },
-      "id": 32,
-      "options": {
-        "folderUID": "7b880fa7-185f-403d-9ea4-df28af5436f9",
-        "includeVars": false,
-        "keepTime": false,
-        "maxItems": 5,
-        "query": "",
-        "showFolderNames": true,
-        "showHeadings": true,
-        "showRecentlyViewed": false,
-        "showSearch": true,
-        "showStarred": false,
-        "tags": [
-          "Tenant"
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory Used (from tenant requests)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 291
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Tenant"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 190
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #Price"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "Kr"
+              },
+              {
+                "id": "displayName",
+                "value": "Price (NOK)"
+              }
+            ]
+          }
         ]
       },
-      "pluginVersion": "11.6.0",
-      "title": "Tenant Dashboards",
-      "type": "dashlist"
+      "gridPos": {
+        "h": 30,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 20,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "CPU Used (from tenant request)"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "quota-request-cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum by (name)(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n*\nsum  by(name)(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"used\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "Used of CPU Request"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"used\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "quota-request-used-cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"hard\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "quota-request-memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100\n/\nsum by (name)(openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"hard\"})\n*\nsum  by(name)(openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"used\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "Used memory requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"used\"})",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "quota-request-used-memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(name) (openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"}) * $vcpuprice",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "Price"
+        }
+      ],
+      "title": "Tenant Stats",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": false,
+              "Value #quota-request-used-cpu": false,
+              "name": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #Price": 2,
+              "Value #Used memory requests": 8,
+              "Value #Used of CPU Request": 5,
+              "Value #quota-request-cpu": 3,
+              "Value #quota-request-memory": 7,
+              "Value #quota-request-used-cpu": 4,
+              "Value #quota-request-used-memory": 6,
+              "name": 1
+            },
+            "renameByName": {
+              "Value #Price": "",
+              "name": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "preload": false,
+  "refresh": "",
   "schemaVersion": 41,
   "tags": [],
   "templating": {
@@ -1466,9 +1510,7 @@
           "text": "cluster-local-prometheus",
           "value": "cluster-local-prometheus"
         },
-        "includeAll": false,
-        "label": "Datasource",
-        "name": "datasource",
+        "name": "Datasource",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
@@ -1477,21 +1519,40 @@
       },
       {
         "current": {
-          "text": "operations-grafana.apps.test-1.cp.oslo.kommune.no",
-          "value": "operations-grafana.apps.test-1.cp.oslo.kommune.no"
+          "text": "",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${Datasource}"
         },
-        "definition": "label_values(openshift_route_info{namespace=\"operations-grafana\"},host)",
+        "definition": "label_values(kube_node_info,cluster)",
         "hide": 2,
-        "includeAll": false,
-        "name": "grafana_url",
+        "name": "cluster",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(openshift_route_info{namespace=\"operations-grafana\"},host)",
+          "query": "label_values(kube_node_info,cluster)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "team-poseidon",
+          "value": "team-poseidon"
+        },
+        "definition": "label_values(kube_namespace_labels{label_soprasteria_team=\"team-poseidon\"},label_soprasteria_team)",
+        "hide": 2,
+        "name": "teamName",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(kube_namespace_labels{label_soprasteria_team=\"team-poseidon\"},label_soprasteria_team)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1500,35 +1561,19 @@
       },
       {
         "current": {
-          "text": "13.4",
-          "value": "13.4"
+          "text": "0",
+          "value": "0"
         },
-        "description": "",
-        "name": "query16vcpu",
+        "label": "vCPU price (NOK)",
+        "name": "vcpuprice",
         "options": [
           {
             "selected": true,
-            "text": "13.4",
-            "value": "13.4"
+            "text": "0",
+            "value": "0"
           }
         ],
-        "query": "13.4",
-        "type": "textbox"
-      },
-      {
-        "current": {
-          "text": "25.5",
-          "value": "25.5"
-        },
-        "name": "query8vcpu",
-        "options": [
-          {
-            "selected": true,
-            "text": "25.5",
-            "value": "25.5"
-          }
-        ],
-        "query": "25.5",
+        "query": "0",
         "type": "textbox"
       }
     ]
@@ -1539,7 +1584,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Cluster Tenant Overview",
-  "uid": "beo4on71pyvb4b",
-  "version": 2
+  "title": "Team Overview All Tenants",
+  "uid": "1619edad-97c2-4ce5-922c-7d7bf01fd61b",
+  "version": 42
 }
