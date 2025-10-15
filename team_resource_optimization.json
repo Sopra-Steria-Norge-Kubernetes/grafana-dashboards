@@ -1610,7 +1610,6 @@
         "options": [],
         "query": "prometheus",
         "refresh": 1,
-        "regex": "/local|metrics/",
         "type": "datasource"
       },
       {
