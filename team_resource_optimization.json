@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 35,
+  "id": 214,
   "links": [],
   "panels": [
     {
@@ -43,7 +43,7 @@
         "content": "# Tenant Overview - ${tenant}\n\n",
         "mode": "markdown"
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "title": "",
       "transparent": true,
       "type": "text"
@@ -83,7 +83,7 @@
         "content": "<div style=\"font-family: sans-serif; color: #ffffff; background-color: #1e1e1e; padding: 20px; border-radius: 8px;\">\n  <h1 style=\"color: #f97316; font-size: 24px\">⚙️ Resource Optimization</h1>\n\n  <div style=\"margin-bottom: 20px; padding: 12px 0; border-bottom: 1px solid #4b5563;\">\n    <p style=\"font-size: 13px; line-height: 1.8;\">\n      <strong style=\"color: grey\">vCPU price (NOK):</strong> Cost per virtual CPU in Norwegian kroner, used to calculate resource cost.<br>\n      <strong style=\"color: grey\">CPU percentile:</strong> The percentile used to calculate recommended CPU requests. <br>\n      <strong style=\"color: grey\">Overhead percentage:</strong> A percentage added on top of the CPU percentile to account for variation and buffer.\n    </p>\n  </div>\n\n  <div style=\"border-left: 4px solid #ef4444; background-color: #2a2a2a; padding: 16px; margin-bottom: 20px;\">\n    <h2 style=\"color: #ef4444; font-size: 22px\">‼️ Important information:</h2>\n\n    <ul style=\"line-height: 1.6; font-size: 15px;\">\n      <li>\n        All recommendations are based on measurements of actual resource usage for the containers over a defined period (X), evaluated using the <strong>95th percentile</strong>.\n        <ul>\n          <li style=\"margin-top: 5px;\">\n            <em>For CPU, we set a request at the 95th percentile with no limit. Meaning, in 95% of the cases, your CPU request will be sufficient. For the remaining 5%, we set no limit. This means your pod can burst and use any CPU available on the node – e.g. CPU that other pods requested but aren’t using right now.</em>\n          </li>\n        </ul>\n      </li>\n\n      <li>Usage patterns may vary significantly between <strong>test and production environments</strong>, and this should be taken into account when setting threshold values for resource allocation.</li>\n\n      <li>For certain <strong>third-party services</strong>, alternative guidelines for resource usage may apply. In such cases, the vendor’s recommendations must be followed.</li>\n\n      <li>Different <strong>programming languages and runtime environments</strong> may handle resource requests and limits differently. It is therefore recommended to consult the relevant documentation for the specific language before using the measurement data as a basis for configuration.</li>\n    </ul>\n  </div>\n\n  <h5 style=\"color: #f3f4f6; margin-bottom: 8px;\">More information:</h5>\n  <ul style=\"list-style-type: none; padding-left: 0; font-size: 14px; line-height: 1.8;\">\n    <li><a href=\"https://sopra-steria-norge-kubernetes.github.io/OpenShift/OpenShift%20Teams/Team%20features/observability/\" style=\"color: #38bdf8; text-decoration: none;\">- Sopra Steria - Developer Teams Observability</a></li>\n    <li><a href=\"https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/\" style=\"color: #38bdf8; text-decoration: none;\">- Kubernetes - Resource Management for Pods and Containers</a></li>\n    <li><a href=\"https://sysdig.com/blog/kubernetes-limits-requests/\" style=\"color: #38bdf8; text-decoration: none;\">- Sysdig - Understanding Kubernetes Limits and Requests</a></li>\n  </ul>\n</div>",
         "mode": "html"
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "title": "",
       "type": "text"
     },
@@ -153,7 +153,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -219,7 +219,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -284,7 +284,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -348,7 +348,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -449,7 +449,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -519,7 +519,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -720,7 +720,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -1309,7 +1309,7 @@
           }
         ]
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.0.1",
       "targets": [
         {
           "datasource": {
@@ -1603,8 +1603,8 @@
     "list": [
       {
         "current": {
-          "text": "cluster-local-prometheus",
-          "value": "cluster-local-prometheus"
+          "text": "cluster-metrics",
+          "value": "23aec4f6-99a6-414a-aad3-bdc5085de9f5"
         },
         "name": "Datasource",
         "options": [],
@@ -1615,8 +1615,12 @@
       {
         "allowCustomValue": false,
         "current": {
-          "text": "hel-boligvirkemidler",
-          "value": "hel-boligvirkemidler"
+          "text": "pbe-kart",
+          "value": "pbe-kart"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${Datasource}"
         },
         "definition": "label_values(kube_namespace_labels,label_soprasteria_tenant)",
         "label": "Tenant",
@@ -1740,5 +1744,5 @@
   "timezone": "browser",
   "title": "Resource Optimization",
   "uid": "048ee644-abf5-4971-ba8d-c754e1973468",
-  "version": 60
+  "version": 2
 }
