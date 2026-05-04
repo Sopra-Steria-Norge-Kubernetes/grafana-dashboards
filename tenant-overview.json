@@ -38,7 +38,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${datasource}"
       },
       "description": "Hvor mange % som forsvinner til admin overhead på 16vCPU worker noder.",
       "fieldConfig": {
@@ -167,7 +167,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -184,7 +184,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -248,7 +248,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -320,7 +320,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -390,7 +390,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${datasource}"
       },
       "description": "Hvor mange % som forsvinner til admin overhead på 8vCPU worker noder.",
       "fieldConfig": {
@@ -515,7 +515,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -532,7 +532,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -592,7 +592,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cluster-local-prometheus"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -758,7 +758,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -835,7 +835,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -903,7 +903,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -971,7 +971,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1045,7 +1045,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{resource=\"cpu\", node=~\".*worker.*\"}) by (node))\n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"cpu\"})\n* 100",
@@ -1119,7 +1119,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.cpu\", type=\"hard\"})\n/\n(sum(kube_node_status_allocatable{node=~\".*worker-.*\", resource=\"cpu\"})) \n* 100",
@@ -1192,7 +1192,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(avg_over_time(instance:node_cpu:rate:sum{instance=~'.*worker.*'}[60m])) \n/ \nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"cpu\"}) \n* 100",
@@ -1265,7 +1265,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(sum(kube_pod_resource_request{node=~\".*worker.*\",resource='memory'} /1014/1024/1024) by (node)) \n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) \n* 100",
@@ -1338,7 +1338,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum(openshift_clusterresourcequota_usage{resource=\"requests.memory\", type=\"hard\"} /1024/1024/1024)\n/\nsum(kube_node_status_capacity{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) \n* 100",
@@ -1411,7 +1411,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "cluster-local-prometheus"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "((sum(node_memory_MemTotal_bytes{instance=~\".*worker.*\"}) - sum(node_memory_MemAvailable_bytes{instance=~\".*worker.*\"})) / 1024 / 1024 / 1024)  \n/ \nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) * 100",
@@ -1463,8 +1463,8 @@
     "list": [
       {
         "current": {
-          "text": "cluster-local-prometheus",
-          "value": "cluster-local-prometheus"
+          "text": "${datasource}",
+          "value": "${datasource}"
         },
         "includeAll": false,
         "label": "Datasource",
