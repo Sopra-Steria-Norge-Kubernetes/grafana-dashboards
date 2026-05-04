@@ -95,7 +95,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-16.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-16.*\", resource=\"cpu\"})\n)\n* 100",
+          "expr": "(\n    sum(kube_pod_container_resource_requests{node=~'.*worker-16.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-16.*\", resource=\"cpu\"})\n)\n* 100 or on() vector(0)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -447,7 +447,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "(\n    sum(kube_pod_resource_request{node=~'.*worker-8.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-8.*\", resource=\"cpu\"})\n)\n* 100 or on() vector(0)",
+          "expr": "(\n    sum(kube_pod_container_resource_requests{node=~'.*worker-8.*', resource='cpu', namespace=~'openshift-.*|stackrox'})\n/\n    sum(kube_node_status_capacity{node=~\".*worker-8.*\", resource=\"cpu\"})\n)\n* 100 or on() vector(0)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1268,7 +1268,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(sum(kube_pod_resource_request{node=~\".*worker.*\",resource='memory'} /1014/1024/1024) by (node)) \n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1014/1024/1024) \n* 100",
+          "expr": "sum(sum(kube_pod_container_resource_requests{node=~\".*worker.*\",resource=\"memory\"}) by (node) /1024/1024/1024) \n/\nsum(kube_node_status_allocatable{node=~\".*worker.*\", resource=\"memory\"} /1024/1024/1024) \n* 100",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
