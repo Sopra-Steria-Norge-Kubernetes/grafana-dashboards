@@ -3,7 +3,7 @@
   "kind": "Dashboard",
   "metadata": {
     "name": "1619edad-97c2-4ce5-922c-7d7bf01fd61b",
-    "generation": 2,
+    "generation": 4,
     "creationTimestamp": "2026-08-05T21:05:28Z",
     "labels": {},
     "annotations": {}
@@ -1709,7 +1709,7 @@
                   "showLineNumbers": false,
                   "showMiniMap": false
                 },
-                "content": "# Cost Overview - ${teamName}\n\n",
+                "content": "# Cost Overview\n\n",
                 "mode": "markdown"
               },
               "fieldConfig": {
@@ -2165,7 +2165,7 @@
       "hideTimepicker": false,
       "fiscalYearStartMonth": 0
     },
-    "title": "Team Overview All Tenants",
+    "title": "Team Overview v2",
     "variables": [
       {
         "kind": "DatasourceVariable",
