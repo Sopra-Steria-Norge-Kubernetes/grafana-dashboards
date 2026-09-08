@@ -1,0 +1,563 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "13.3.0-32457798232"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "13.1.7"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Per-storageclass raw (replicated) capacity, usable hard quota, used, and usage % for cluster storage.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "gridPos": {
+        "h": 17,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "Storage quota by storage class.\n\n- **Hard (usable) GB** — the logical quota granted to the namespace; this is what counts against your PVC requests.\n- **Used GB** — logical GB currently consumed against that hard quota.\n- **Raw (replicated) GB** — physical Ceph capacity actually reserved, after replication overhead: `Raw = Hard × Replication`.\n- **Replication** — how many physical copies Ceph keeps per logical GB on that storage class.\n\n| Storage class | Replication | Used for | Why choose it |\n|---|---|---|---|\n| `ocs-storagecluster-ceph-rbd-virtualization` | 3× (3-site) | OpenShift **VM disks** only | Not for end-user/application storage — reserved for virtualization workloads |\n| `ocs-storagecluster-ceph-rbd` | 3× (3-site) | **General-purpose** container storage | Default choice for most application PVCs needing full 3-site resilience |\n| `ocs-storagecluster-ceph-non-resilient-rbd` | 1×, not replicated | Apps with their **own replication**, e.g. Kafka, Elasticsearch | Minimizes physical storage usage — no Ceph-side redundancy, since the app already replicates data itself |\n| `ceph-rbd-2-site` | 2×, 2-site | **General-purpose**, smaller footprint | Cheaper than 3-site RBD when full 3-site resilience isn't required |\n| `ocs-storagecluster-cephfs` | 3× (3-site) | Shared **filesystem (ReadWriteMany)** access | Use when multiple pods need concurrent read/write to the same volume |\n\n**Choosing between them:** default to `ocs-storagecluster-ceph-rbd` for general application PVCs; use `ceph-rbd-2-site` when you want a smaller replication footprint and can accept 2-site resilience; use `ocs-storagecluster-ceph-non-resilient-rbd` only for workloads that replicate data themselves (Kafka, Elasticsearch) to avoid paying for redundant Ceph replication; use `ocs-storagecluster-cephfs` only when you need shared multi-pod filesystem access; never request `ocs-storagecluster-ceph-rbd-virtualization` for application/container storage — it's reserved for OpenShift Virtualization VM disks.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "13.3.0-32457798232",
+      "title": "How to read this table",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "$datasource"
+      },
+      "description": "Hard = usable quota granted; Used = usable GB consumed; Raw (replicated) = physical Ceph capacity reserved after replication overhead (Raw = Hard × Replication factor).",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": [
+                "sum"
+              ]
+            },
+            "inspect": false
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "namespace"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 160
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "storageclass"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Storage Class"
+              },
+              {
+                "id": "custom.width",
+                "value": 320
+              },
+              {
+                "id": "custom.footer.reducers",
+                "value": []
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "replication_factor"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Replication"
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.width",
+                "value": 170
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "color": "orange",
+                        "text": "1× (not replicated)"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "2": {
+                        "color": "blue",
+                        "text": "2× (2-site)"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "3": {
+                        "color": "green",
+                        "text": "3× (3-site)"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.footer.reducers",
+                "value": []
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "raw_gb"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Raw (replicated) GB"
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.width",
+                "value": 150
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hard_gb"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Hard (usable) GB"
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.width",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "used_gb"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Used GB"
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "usage_ratio"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Usage %"
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              },
+              {
+                "id": "custom.footer.reducers",
+                "value": []
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "usage_ratio"
+          }
+        ]
+      },
+      "pluginVersion": "13.3.0-32457798232",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "label_replace(label_replace(label_replace(label_replace(kube_namespace_labels{namespace=\"servicenow\"}, \"storageclass\", \"ceph-rbd-2-site\", \"namespace\", \"(.*)\"), \"raw_gb\", \"$1\", \"label_snow_storage_ceph_rbd_2_site\", \"([0-9]+)GB\"), \"hard_gb\", \"$1\", \"label_snow_storage_ceph_rbd_2_site_hard\", \"([0-9]+)GB\"), \"used_gb\", \"$1\", \"label_snow_storage_ceph_rbd_2_site_used\", \"([0-9]+)GB\")",
+          "format": "table",
+          "instant": true,
+          "queryType": "instant",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "label_replace(label_replace(label_replace(label_replace(kube_namespace_labels{namespace=\"servicenow\"}, \"storageclass\", \"ocs-storagecluster-ceph-non-resilient-rbd\", \"namespace\", \"(.*)\"), \"raw_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_non_resilient_rbd\", \"([0-9]+)GB\"), \"hard_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_non_resilient_rbd_hard\", \"([0-9]+)GB\"), \"used_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_non_resilient_rbd_used\", \"([0-9]+)GB\")",
+          "format": "table",
+          "instant": true,
+          "queryType": "instant",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "label_replace(label_replace(label_replace(label_replace(kube_namespace_labels{namespace=\"servicenow\"}, \"storageclass\", \"ocs-storagecluster-ceph-rbd\", \"namespace\", \"(.*)\"), \"raw_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_rbd\", \"([0-9]+)GB\"), \"hard_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_rbd_hard\", \"([0-9]+)GB\"), \"used_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_rbd_used\", \"([0-9]+)GB\")",
+          "format": "table",
+          "instant": true,
+          "queryType": "instant",
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "label_replace(label_replace(label_replace(label_replace(kube_namespace_labels{namespace=\"servicenow\"}, \"storageclass\", \"ocs-storagecluster-ceph-rbd-virtualization\", \"namespace\", \"(.*)\"), \"raw_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_rbd_virtualization\", \"([0-9]+)GB\"), \"hard_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_rbd_virtualization_hard\", \"([0-9]+)GB\"), \"used_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_ceph_rbd_virtualization_used\", \"([0-9]+)GB\")",
+          "format": "table",
+          "instant": true,
+          "queryType": "instant",
+          "range": false,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "label_replace(label_replace(label_replace(label_replace(kube_namespace_labels{namespace=\"servicenow\"}, \"storageclass\", \"ocs-storagecluster-cephfs\", \"namespace\", \"(.*)\"), \"raw_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_cephfs\", \"([0-9]+)GB\"), \"hard_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_cephfs_hard\", \"([0-9]+)GB\"), \"used_gb\", \"$1\", \"label_snow_storage_ocs_storagecluster_cephfs_used\", \"([0-9]+)GB\")",
+          "format": "table",
+          "instant": true,
+          "queryType": "instant",
+          "range": false,
+          "refId": "E"
+        }
+      ],
+      "title": "Storage Quota — Used vs Hard Limit by StorageClass",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "namespace",
+                "storageclass",
+                "raw_gb",
+                "hard_gb",
+                "used_gb"
+              ]
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "raw_gb"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "hard_gb"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "used_gb"
+              }
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "usage_ratio",
+            "binary": {
+              "left": "used_gb",
+              "operator": "/",
+              "right": "hard_gb"
+            },
+            "mode": "binary",
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "replication_factor",
+            "binary": {
+              "left": "raw_gb",
+              "operator": "/",
+              "right": "hard_gb"
+            },
+            "mode": "binary",
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "namespace": true
+            },
+            "indexByName": {
+              "hard_gb": 2,
+              "namespace": 6,
+              "raw_gb": 5,
+              "replication_factor": 1,
+              "storageclass": 0,
+              "usage_ratio": 4,
+              "used_gb": 3
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": true,
+        "current": {
+          "text": "",
+          "value": "${DS_PROMETHEUS}",
+          "selected": true
+        },
+        "includeAll": false,
+        "label": "Datasource",
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "Cluster Storage Quota",
+  "uid": "ars6spd",
+  "version": 7,
+  "weekStart": ""
+}
