@@ -601,7 +601,7 @@
                     },
                     {
                       "color": "green",
-                      "value": 0.00001
+                      "value": 1e-05
                     }
                   ]
                 }
@@ -646,7 +646,7 @@
                     },
                     {
                       "color": "green",
-                      "value": 0.00001
+                      "value": 1e-05
                     }
                   ]
                 }
@@ -729,7 +729,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "clamp_min(\n  quantile_over_time(\n  ${cpupercentile},\n  avg by (namespace, owner_name, container) (\n    rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])\n    * on(namespace) group_left()\n      kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n    * on(namespace, pod) group_left(owner_name)\n      kube_pod_owner{owner_is_controller=~\"true\"}\n  )[1h:] \n) \n* ${percentage},\n0.01\n)",
+          "expr": "clamp_min(\n  quantile_over_time(\n    ${cpupercentile},\n    avg by (namespace, owner_name, container) (\n      rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])\n      * on(namespace) group_left()\n        kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n      * on(namespace, pod) group_left()\n        max by (namespace, pod) (\n          kube_pod_status_phase{phase!=\"Failed\"}\n        )\n      * on(namespace, pod) group_left(owner_name, owner_kind)\n        kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n    )[1h:]\n  )\n  * ${percentage},\n  0.01\n)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -744,7 +744,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by (namespace, owner_name) (\n  kube_pod_container_resource_requests{resource=\"cpu\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
+          "expr": "avg by (namespace, owner_name, container) (\n  kube_pod_container_resource_requests{resource=\"cpu\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1005,7 +1005,7 @@
                     },
                     {
                       "color": "green",
-                      "value": 0.00001
+                      "value": 1e-05
                     }
                   ]
                 }
@@ -1055,7 +1055,7 @@
                     },
                     {
                       "color": "green",
-                      "value": -0.00009
+                      "value": -9e-05
                     }
                   ]
                 }
@@ -1257,7 +1257,7 @@
                     },
                     {
                       "color": "green",
-                      "value": 0.00001
+                      "value": 1e-05
                     }
                   ]
                 }
@@ -1318,7 +1318,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "clamp_min(\n  quantile_over_time(\n  ${cpupercentile},\n  avg by (namespace, owner_name, container) (\n    rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])\n    * on(namespace) group_left()\n      kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n    * on(namespace, pod) group_left(owner_name)\n      kube_pod_owner{owner_is_controller=~\"true\"}\n  )[1h:] \n) \n* ${percentage},\n0.01\n)",
+          "expr": "clamp_min(\n  quantile_over_time(\n    ${cpupercentile},\n    avg by (namespace, owner_name, container) (\n      rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])\n      * on(namespace) group_left()\n        kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n      * on(namespace, pod) group_left()\n        max by (namespace, pod) (\n          kube_pod_status_phase{phase!=\"Failed\"}\n        )\n      * on(namespace, pod) group_left(owner_name, owner_kind)\n        kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n    )[1h:]\n  )\n  * ${percentage},\n  0.01\n)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1334,7 +1334,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by (namespace, owner_name) (\n  kube_pod_container_resource_requests{resource=\"cpu\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
+          "expr": "avg by (namespace, owner_name, container) (\n  kube_pod_container_resource_requests{resource=\"cpu\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1364,7 +1364,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(kube_pod_container_resource_requests{resource=\"memory\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}) /1024/1024",
+          "expr": "sum by (namespace, owner_name) (\n  kube_pod_container_resource_requests{resource=\"memory\", container!=\"\"}\n  * on(namespace) group_left()\n    kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n  * on(namespace, pod) group_left()\n    max by (namespace, pod) (\n      kube_pod_status_phase{phase!=\"Failed\"}\n    )\n  * on(namespace, pod) group_left(owner_name, owner_kind)\n    kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n) / 1024 / 1024",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1379,7 +1379,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "clamp_min(\n  (sum by (namespace, owner_name) (\n    max_over_time(container_memory_working_set_bytes{container!=\"\"}[1h:])\n      * on(namespace) group_left()\n        kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n      * on(namespace, pod) group_left(owner_name, owner_kind)\n        kube_pod_owner{owner_is_controller=\"true\", owner_kind!=\"Job\"}\n  ) / 1024 / 1024) * 1.15,\n  50\n)",
+          "expr": "clamp_min(\n  (sum by (namespace, owner_name) (\n    max_over_time(container_memory_working_set_bytes{container!=\"\"}[1h:])\n      * on(namespace) group_left()\n        kube_namespace_labels{label_soprasteria_tenant=~\"${tenant}\"}\n      * on(namespace, pod) group_left()\n        max by (namespace, pod) (\n          kube_pod_status_phase{phase!=\"Failed\"}\n        )\n      * on(namespace, pod) group_left(owner_name, owner_kind)\n        kube_pod_owner{owner_is_controller=~\"true\", owner_kind!=\"Job\"}\n  ) / 1024 / 1024) * 1.15,\n  50\n)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1744,5 +1744,5 @@
   "timezone": "browser",
   "title": "Resource Optimization",
   "uid": "048ee644-abf5-4971-ba8d-c754e1973468",
-  "version": 2
+  "version": 3
 }
